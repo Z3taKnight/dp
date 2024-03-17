@@ -35,13 +35,5 @@ var pairSum = function (head) {
     tail = tail.next;
   }
 
-  prev = null;
-  while (current !== null) {
-    const next = current.next;
-    current.next = prev;
-    prev = current;
-    current = next;
-  }
-
   return maxSum;
 };

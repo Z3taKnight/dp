@@ -12,30 +12,26 @@
  * @return {boolean}
  */
 var leafSimilar = function (root1, root2) {
-  let root1Leaf = getLeafNode(root1);
-  root1Leaf = root1Leaf.filter((ele) => ele != false);
-  let root2Leaf = getLeafNode(root2);
-  root2Leaf = root2Leaf.filter((ele) => ele != false);
-  return equalLeaf(root1Leaf, root2Leaf);
+  const leaves1 = [];
+  const leaves2 = [];
+
+  dfs(root1, leaves1);
+  dfs(root2, leaves2);
+
+  if (leaves1.length !== leaves2.length) return false;
+  for (let i = 0; i < leaves1.length; i++) {
+    if (leaves1[i] !== leaves2[i]) return false;
+  }
+
+  return true;
 };
 
-var getLeafNode = function (root) {
-  if (!root) return false;
-  let arr = [];
-  let leftLeafNode = getLeafNode(root.left);
-  let rightLeafNode = getLeafNode(root.right);
-  if (!leftLeafNode && !rightLeafNode) arr.push(root.val);
-  else if (Array.isArray(leftLeafNode) && Array.isArray(rightLeafNode))
-    arr.push(...leftLeafNode, ...rightLeafNode);
-  else if (Array.isArray(leftLeafNode))
-    arr.push(...leftLeafNode, rightLeafNode);
-  else if (Array.isArray(rightLeafNode))
-    arr.push(leftLeafNode, ...rightLeafNode);
-  else arr.push(leftLeafNode, rightLeafNode);
-  return arr;
-};
-
-var equalLeaf = function (leaf1, leaf2) {
-  if (leaf1.length != leaf2.length) return false;
-  return leaf1.every((ele, i) => ele === leaf2[i]);
+var dfs = function (node, leaves) {
+  if (!node) return;
+  if (!node.left && !node.right) {
+    leaves.push(node.val);
+  } else {
+    dfs(node.left, leaves);
+    dfs(node.right, leaves);
+  }
 };

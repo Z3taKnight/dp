@@ -27,5 +27,3 @@ var combinationSum3 = function (k, n) {
   tracking(1, n);
   return arr;
 };
-
-console.log(combinationSum3(3, 9));

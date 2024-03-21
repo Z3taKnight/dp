@@ -12,5 +12,3 @@ var minCostClimbingStairs = function (cost) {
   }
   return b;
 };
-
-console.log(minCostClimbingStairs([0, 0, 1, 1]));

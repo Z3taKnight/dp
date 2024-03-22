@@ -33,5 +33,3 @@ var letterCombinations = function (digits) {
   }
   return arr;
 };
-
-console.log(letterCombinations("23"));

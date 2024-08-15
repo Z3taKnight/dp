@@ -3,13 +3,16 @@
  * @return {boolean}
  */
 var isPalindrome = function (x) {
-    let newNum = ''
-    let oldNum = x
-    if (x < 0) return false
-    while (x != 0) {
-        newNum += x % 10
-        x = (parseInt(x / 10))
+    if (x < 0) return false;
+    if (x >= 0 && x < 10) return true;
+
+    let reversed = 0;
+    let original = x;
+
+    while (x > 0) {
+        reversed = reversed * 10 + (x % 10);
+        x = Math.floor(x / 10);
     }
-    if (oldNum == Number(newNum)) return true
-    return false
+
+    return original === reversed;
 };

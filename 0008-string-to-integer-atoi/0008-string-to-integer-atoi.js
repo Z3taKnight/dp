@@ -6,30 +6,27 @@ var myAtoi = function (s) {
     s = s.trim();
     if (s.length === 0) return 0;
 
+    let sign = 1;
     let index = 0;
-    let isNegative = false;
-
-    if (s[index] === '-' || s[index] === '+') {
-        isNegative = s[index] === '-';
-        index++;
-    }
-
-    let num = 0;
+    let result = 0;
     const INT_MAX = 2 ** 31 - 1;
     const INT_MIN = -(2 ** 31);
 
-    while (index < s.length && isDigit(s[index])) {
-        num = num * 10 + (s[index] - '0');
-
-        if (!isNegative && num > INT_MAX) return INT_MAX;
-        if (isNegative && -num < INT_MIN) return INT_MIN;
-
+    // Handle sign
+    if (s[index] === '-' || s[index] === '+') {
+        sign = s[index] === '-' ? -1 : 1;
         index++;
     }
 
-    return isNegative ? -num : num;
-};
+    // Parse digits
+    while (index < s.length && s.charCodeAt(index) >= '0'.charCodeAt(0) && s.charCodeAt(index) <= '9'.charCodeAt(0)) {
+        const digit = s.charCodeAt(index) - '0'.charCodeAt(0);
+        if (result > Math.floor(INT_MAX / 10) || (result === Math.floor(INT_MAX / 10) && digit > 7)) {
+            return sign === 1 ? INT_MAX : INT_MIN;
+        }
+        result = result * 10 + digit;
+        index++;
+    }
 
-var isDigit = function (char) {
-    return char >= '0' && char <= '9';
-}
+    return result * sign;
+};

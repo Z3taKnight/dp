@@ -12,13 +12,11 @@ var myAtoi = function (s) {
     const INT_MAX = 2 ** 31 - 1;
     const INT_MIN = -(2 ** 31);
 
-    // Handle sign
     if (s[index] === '-' || s[index] === '+') {
         sign = s[index] === '-' ? -1 : 1;
         index++;
     }
 
-    // Parse digits
     while (index < s.length && s.charCodeAt(index) >= '0'.charCodeAt(0) && s.charCodeAt(index) <= '9'.charCodeAt(0)) {
         const digit = s.charCodeAt(index) - '0'.charCodeAt(0);
         if (result > Math.floor(INT_MAX / 10) || (result === Math.floor(INT_MAX / 10) && digit > 7)) {

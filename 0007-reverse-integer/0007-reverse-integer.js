@@ -15,6 +15,5 @@ var reverse = function (x) {
 };
 
 var is32BitInteger = function (num) {
-    let n = 2 ** 31
     return num >= -(2 ** 31) && num <= (2 ** 31) - 1;
 }
